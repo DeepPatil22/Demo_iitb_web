@@ -3,10 +3,378 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to IIT Bombay</title>
+    <title>Sports at IIT Bombay</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .sports-banner {
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('./images/main ground.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 20px;
+            text-align: center;
+        }
 
+        .sports-banner h1 {
+            font-size: 3.2em;
+            margin-bottom: 20px;
+            color: #ffffff;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8),
+                         0 0 20px rgba(255,255,255,0.4),
+                         0 0 40px rgba(255,255,255,0.3);
+            background: none;
+            box-shadow: none;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+        
+        .sports-banner p {
+            font-size: 1.6em;
+            color: #ffffff;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8),
+                         0 0 15px rgba(255,255,255,0.3);
+            font-weight: bold;
+            letter-spacing: 0.5px;
+        }
+
+        .sports-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 40px 20px;
+            background: #f5f5f5;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            animation: bounce 1s infinite;
+        }
+
+        @keyframes countUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .stat-number {
+            font-size: 2.5em;
+            color: #1a237e;
+            font-weight: bold;
+            margin: 10px 0;
+            opacity: 0;
+            animation: countUp 1s ease forwards;
+        }
+
+        .stat-card:nth-child(1) .stat-number { animation-delay: 0.2s; }
+        .stat-card:nth-child(2) .stat-number { animation-delay: 0.4s; }
+        .stat-card:nth-child(3) .stat-number { animation-delay: 0.6s; }
+        .stat-card:nth-child(4) .stat-number { animation-delay: 0.8s; }
+
+        .facilities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 40px 20px;
+        }
+
+        .facility-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .facility-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .facility-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .facility-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 20px;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            color: white;
+        }
+
+        .achievement-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e8eaf6 100%);
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .achievement-section h2 {
+            color: #1a237e;
+            font-size: 2.5em;
+            margin-bottom: 40px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .achievement-section h2:after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #1a237e, #3949ab);
+            border-radius: 2px;
+        }
+
+        .achievement-list {
+            max-width: 900px;
+            margin: 30px auto;
+            text-align: left;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            padding: 20px;
+        }
+
+        .achievement-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+            padding: 30px 25px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .achievement-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .achievement-item:before {
+            content: "🏆";
+            font-size: 3em;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #fff6e6, #ffe0b2);
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .achievement-item h3 {
+            color: #1a237e;
+            margin: 15px 0;
+            font-size: 1.4em;
+            text-align: center;
+        }
+
+        .achievement-item p {
+            color: #616161;
+            text-align: center;
+            line-height: 1.6;
+            margin: 0;
+            font-size: 1.1em;
+        }
+
+        .back-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 15px 30px;
+            background: #1a237e;
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+    </style>
 </head>
-<body>  
-<p>IIT bombay has good sport facilities such as cricket, football etc</p>
-<a href="https://www.iitb.ac.in/sports" target="_blank">IIT Bombay Sports</a>
+<body>
+    <div class="sports-banner">
+        <h1>Sports Excellence at IIT Bombay</h1>
+        <p>Nurturing Champions, Building Character</p>
+    </div>
+
+    <section class="sports-stats">
+        <div class="stat-card">
+            <h3>Sports Facilities</h3>
+            <div class="stat-number">15+</div>
+            <p>World-class facilities</p>
+        </div>
+        <div class="stat-card">
+            <h3>Sports Teams</h3>
+            <div class="stat-number">20+</div>
+            <p>Competitive teams</p>
+        </div>
+        <div class="stat-card">
+            <h3>Annual Events</h3>
+            <div class="stat-number">50+</div>
+            <p>Sporting events</p>
+        </div>
+        <div class="stat-card">
+            <h3>Active Athletes</h3>
+            <div class="stat-number">1000+</div>
+            <p>Student athletes</p>
+        </div>
+    </section>
+
+    <section class="facilities-grid">
+        <div class="facility-card">
+            <img src="./images/swiming pool.jpg" alt="Swimming Pool">
+            <div class="facility-info">
+                <h3>Olympic-Size Swimming Pool</h3>
+                <p>State-of-the-art swimming facility with professional coaching</p>
+            </div>
+        </div>
+        <div class="facility-card">
+            <img src="./images/main ground.jpg" alt="Main Sports Ground">
+            <div class="facility-info">
+                <h3>Main Sports Ground</h3>
+                <p>Multi-purpose sports ground for various outdoor activities</p>
+            </div>
+        </div>
+        <div class="facility-card">
+            <img src="./images/iitb indore sport activity.webp" alt="Indoor Sports Activities">
+            <div class="facility-info">
+                <h3>Indoor Sports Complex</h3>
+                <p>World-class facilities for table tennis, badminton, chess, carrom, and other indoor sports activities</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="achievement-section">
+        <h2>Our Achievements</h2>
+        <div class="achievement-list">
+            <div class="achievement-item">
+                <div>
+                    <h3>Inter-IIT Sports Meet Champions</h3>
+                    <p>Multiple times overall champions in the prestigious Inter-IIT Sports Competition</p>
+                </div>
+            </div>
+            <div class="achievement-item">
+                <div>
+                    <h3>National Level Success</h3>
+                    <p>Our athletes regularly compete and win at national level championships</p>
+                </div>
+            </div>
+            <div class="achievement-item">
+                <div>
+                    <h3>Olympic Training Center</h3>
+                    <p>Recognized as a center of excellence for sports training</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <a href="index.html" class="back-button">Back to Home</a>
+
+    <footer class="about-footer">
+        <div class="footer-content">
+            <p>
+                Discover the spirit of sports excellence at IIT Bombay. 
+                For more information about our sports programs, visit the 
+                <a href="https://www.iitb.ac.in/sports" target="_blank">official IIT Bombay Sports website</a>
+            </p>
+            <div class="footer-social">
+                <p>Follow us on social media</p>
+                <div class="social-links">
+                    <a href="#" target="_blank">Twitter</a> • 
+                    <a href="#" target="_blank">Instagram</a> • 
+                    <a href="#" target="_blank">Facebook</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <style>
+        .about-footer {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            color: #495057;
+            border-top: 1px solid #dee2e6;
+            margin-top: 40px;
+        }
+
+        .footer-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .about-footer p {
+            margin: 15px 0;
+            line-height: 1.8;
+            font-size: 1.1em;
+        }
+
+        .about-footer a {
+            color: #1a73e8;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 5px 10px;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .about-footer a:hover {
+            background-color: #e8f0fe;
+            color: #1557b0;
+            text-decoration: none;
+        }
+
+        .footer-social {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #dee2e6;
+        }
+
+        .social-links {
+            margin-top: 10px;
+            color: #6c757d;
+        }
+
+        .social-links a {
+            margin: 0 5px;
+        }
+    </style>
 </body>
+</html>
